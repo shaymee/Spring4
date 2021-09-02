@@ -21,7 +21,7 @@ about 공지사항
 
 noticeDAO noticeController noticeService
 2. Notice Sequence
-3. 기능
+3. 기능:back-end부터 만들어봐
 	1) List
 		/notice/list
 		/WEB-INF/views/board/list.jsp
@@ -31,3 +31,9 @@ noticeDAO noticeController noticeService
 	3) 글쓰기
 	4) 삭제
 	5) 수정
+	
+4. 순서
+1)DTO, DAO, MAPPER, TestCase 테스트 수행
+2)Service, Controller, JSP 최종연결 
+
+**9/3 list랑 select까진 다 끝내고오라
