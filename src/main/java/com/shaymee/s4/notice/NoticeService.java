@@ -11,6 +11,15 @@ public class NoticeService {
 	@Autowired
 	private NoticeDAO noticeDAO;
 	
+	public int setDelete(NoticeDTO noticeDTO) {
+		return noticeDAO.setDelete(noticeDTO);
+	}
+	
+	public int setInsert(NoticeDTO noticeDTO) {
+		return noticeDAO.setInsert(noticeDTO);
+	}
+	
+	
 	public List<NoticeDTO> getList() {
 		List<NoticeDTO> ar = noticeDAO.getList();
 		return ar;

@@ -15,6 +15,10 @@ public class NoticeDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.shaymee.s4.notice.NoticeDAO.";
 	
+	public int setDelete(NoticeDTO noticeDTO) {
+		return sqlSession.delete(NAMESPACE+"setDelete", noticeDTO);
+	}
+	
 	public List<NoticeDTO> getList() {
 		List<NoticeDTO> ar = sqlSession.selectList(NAMESPACE+"getList");
 		System.out.println("ar.size : "+ar.size());
@@ -23,6 +27,10 @@ public class NoticeDAO {
 	
 	public NoticeDTO getSelect(NoticeDTO noticeDTO) {
 		return sqlSession.selectOne(NAMESPACE+"getSelect", noticeDTO);
-
 	}
+	
+	public int setInsert(NoticeDTO noticeDTO) {
+		return sqlSession.insert(NAMESPACE+"setInsert", noticeDTO);
+	}
+	
 }

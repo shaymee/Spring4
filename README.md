@@ -29,6 +29,10 @@ noticeDAO noticeController noticeService
 		/notice/select?num=   // 상세보기는 parameter도 넘겨줘야함
 		/WEB-INF/view/board/select.jsp
 	3) 글쓰기
+		/notice/insert GET
+		/WEB-INF/views/board/insert.jsp <form>이동
+		/notice/insert POST
+		--> /notice/list로 이동
 	4) 삭제
 	5) 수정
 	

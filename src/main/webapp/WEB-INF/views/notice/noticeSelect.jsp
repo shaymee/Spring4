@@ -21,6 +21,7 @@
 		</tr>
 		
 	</table>
+	<a href="./noticeDelete?num=${dto.num}" class="btn btn-dark">Delete</a>
 </div>
 
 </body>

@@ -27,6 +27,7 @@
 				</tr>
 			</c:forEach>
 		</table>
+		<a href="./noticeInsert" class="btn btn-outline-success"">글쓰기</a>
 	</div>
 </body>
 </html>
