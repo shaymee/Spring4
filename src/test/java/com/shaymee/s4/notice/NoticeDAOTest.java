@@ -58,10 +58,10 @@ public class NoticeDAOTest extends MyJunitTest{
 	}
 	
 //	@Test
-	public void getListTest() {
-		List<NoticeDTO> ar = noticeDAO.getList();
-		assertNotEquals(0, ar.size());
-	}
+//	public void getListTest() {
+//		List<NoticeDTO> ar = noticeDAO.getList();
+//		assertNotEquals(0, ar.size());
+//	}
 	
 //	@Test
 	public void getSelectTest() {
