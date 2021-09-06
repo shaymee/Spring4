@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.shaymee.s4.util.NoticePager;
+
 @Service
 public class NoticeService {
 	
@@ -19,13 +21,18 @@ public class NoticeService {
 		return noticeDAO.setInsert(noticeDTO);
 	}
 	
-	
-	public List<NoticeDTO> getList() {
-		List<NoticeDTO> ar = noticeDAO.getList();
+	public List<NoticeDTO> getList(NoticePager pager) {
+		pager.makeRow();
+		pager.makeNum();
+		List<NoticeDTO> ar = noticeDAO.getList(pager);
 		return ar;
 	}
 	
 	public NoticeDTO getSelect(NoticeDTO noticeDTO) {
 		return noticeDAO.getSelect(noticeDTO);
+	}
+	
+	public int setUpdate(NoticeDTO noticeDTO) {
+		return noticeDAO.setUpdate(noticeDTO);
 	}
 }

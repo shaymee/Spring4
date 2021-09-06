@@ -22,6 +22,7 @@
 		
 	</table>
 	<a href="./noticeDelete?num=${dto.num}" class="btn btn-dark">Delete</a>
+	<a href="./noticeUpdate?num=${dto.num}" class="btn btn-danger">Update</a>
 </div>
 
 </body>

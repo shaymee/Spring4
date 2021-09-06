@@ -27,7 +27,18 @@
 				</tr>
 			</c:forEach>
 		</table>
+		
+		<ul class="pagination">
+		<!-- pager의 startNum부터 lastNum까지 찍음==>찍는걸 반복 -->
+		<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="n"> <!-- n에다가 숫자를 담으라는 얘기 -->
+		
+			<li class="page-item">
+				<a class="page-link" href="./noticeList?pn=${n}">${n}</a>
+			</li>		
+		</c:forEach> <!-- items 속성은 collection계열만 담당함 -->
+		</ul>
 		<a href="./noticeInsert" class="btn btn-outline-success"">글쓰기</a>
+		
 	</div>
 </body>
 </html>

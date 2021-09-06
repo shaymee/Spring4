@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.shaymee.s4.util.NoticePager;
+
 @Repository
 public class NoticeDAO {
 	
@@ -15,22 +17,30 @@ public class NoticeDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.shaymee.s4.notice.NoticeDAO.";
 	
+	//// Delete /////
 	public int setDelete(NoticeDTO noticeDTO) {
 		return sqlSession.delete(NAMESPACE+"setDelete", noticeDTO);
 	}
 	
-	public List<NoticeDTO> getList() {
-		List<NoticeDTO> ar = sqlSession.selectList(NAMESPACE+"getList");
-		System.out.println("ar.size : "+ar.size());
-		return ar;
+	//// List ////
+	public List<NoticeDTO> getList(NoticePager pager) {
+		return sqlSession.selectList(NAMESPACE+"getList", pager);
 	}
 	
+	//// SELECT ////
 	public NoticeDTO getSelect(NoticeDTO noticeDTO) {
 		return sqlSession.selectOne(NAMESPACE+"getSelect", noticeDTO);
 	}
 	
+	//// INSERT ////
 	public int setInsert(NoticeDTO noticeDTO) {
 		return sqlSession.insert(NAMESPACE+"setInsert", noticeDTO);
 	}
+	
+	//// UPDATE ////
+	public int setUpdate(NoticeDTO noticeDTO) {
+		return sqlSession.update(NAMESPACE+"setUpdate", noticeDTO);				
+	}
+
 	
 }

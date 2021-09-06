@@ -5,8 +5,14 @@
   
   <mapper namespace="com.shaymee.s4.notice.NoticeDAO">
   
-  	<select id="getList" resultType="com.shaymee.s4.notice.NoticeDTO">
-  		SELECT * FROM NOTICE
+  	<select id="getList" parameterType="com.shaymee.s4.util.NoticePager" resultType="com.shaymee.s4.notice.NoticeDTO">
+  		SELECT * 
+		FROM (
+		    SELECT rownum R, NT.* FROM 
+		        (SELECT *  
+		        FROM NOTICE 
+		        ORDER BY NUM DESC) NT ) 
+		        WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   
   	<select id="getSelect" parameterType="com.shaymee.s4.notice.NoticeDTO" resultType="com.shaymee.s4.notice.NoticeDTO">
@@ -20,6 +26,15 @@
   	<delete id="setDelete" parameterType="com.shaymee.s4.notice.NoticeDTO">
   		DELETE NOTICE WHERE NUM = #{num}
   	</delete>
+  	
+  	<update id="setUpdate" parameterType="com.shaymee.s4.notice.NoticeDTO">
+  		UPDATE NOTICE SET TITLE=#{title}, CONTENTS=#{contents}
+  		WHERE NUM=#{num} 
+  	</update>
+  	
+  	<select id="totalCount" resultType="java.lang.String">
+  		SELECT COUNT(NUM) FROM NOTICE;
+  	</select>
   
   </mapper>
   

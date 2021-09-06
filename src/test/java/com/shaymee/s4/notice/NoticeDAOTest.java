@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,19 @@ public class NoticeDAOTest extends MyJunitTest{
 	@Autowired	
 	private NoticeDAO noticeDAO;
 
-	@Test
+//	@Test
+	public void setUpdateTest() {
+		NoticeDTO noticeDTO = new NoticeDTO();
+		noticeDTO.setNum(23L);
+		noticeDTO.setTitle("fucku");
+		noticeDTO.setContents("zz");
+		
+		int result = noticeDAO.setUpdate(noticeDTO);
+		assertEquals(1, result);
+	}
+	
+	
+//	@Test
 	public void setDeleteTest() {
 		NoticeDTO noticeDTO = new NoticeDTO();
 		noticeDTO.setNum(3L);
@@ -24,16 +37,24 @@ public class NoticeDAOTest extends MyJunitTest{
 		assertEquals(1, result);
 	}
 	
-//	@Test
-	public void setListTest() {
+	@Test
+	public void setInsertTest() throws Exception {
 		NoticeDTO noticeDTO = new NoticeDTO();
-		noticeDTO.setTitle("Hello");
-		noticeDTO.setContents("where are u going?");
-		noticeDTO.setWriter("walker");
-		noticeDTO.setHits(0L);
+		Random random = new Random();
 		
-		int result = noticeDAO.setInsert(noticeDTO);
-		assertEquals(1, result);
+		for(int i=0;i<300;i++) {
+			noticeDTO.setTitle("title"+i);
+			noticeDTO.setContents("contents"+i);
+			noticeDTO.setWriter("writer"+i);
+			
+			int result = noticeDAO.setInsert(noticeDTO);
+			
+			if(i%10 == 0) {
+				Thread.sleep(500);
+			}
+		}
+		
+		System.out.println("==== finish ====");
 	}
 	
 //	@Test
