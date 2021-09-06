@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,7 +21,7 @@ public class QnaController {
 	
 	@ModelAttribute("board") 	// @ModelAttribute에서 ()는 해당 model의 이름, 값(value)은 이 메서드가 return하는 값
 	public String getBoard() {	// Model에 board라는 이름으로 모든 메서드에 공통적으로 작동함
-		return "QnA";
+		return "qna";
 	}
 
 	@GetMapping("list") // 1. url 주소에 /qna/list가 오면 백엔드의 해당메서드로 오고
@@ -31,4 +32,55 @@ public class QnaController {
 		mv.addObject("list", ar);
 		return mv;
 	}
+	
+	@GetMapping("select")
+	public ModelAndView getSelect(BoardDTO boardDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		QnaDTO qnaDTO = qnaService.getSelect(boardDTO);
+		mv.setViewName("board/select");
+		mv.addObject("dto", qnaDTO);
+		
+		return mv;
+	}
+	
+	@GetMapping("insert")
+	public ModelAndView setInsert() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/qna/qnaInsert");
+		
+		return mv;
+	}
+	
+	@PostMapping("insert")
+	public String setInsert(BoardDTO boardDTO) throws Exception {
+		int result = qnaService.setInsert(boardDTO);
+		
+		return "redirect:./list";
+	}
+	
+	@GetMapping("delete")
+	public String setDelete(BoardDTO boardDTO) throws Exception {
+		int result = qnaService.setDelete(boardDTO);
+		
+		return "redirect:./list";
+	}
+	
+	@GetMapping("update")
+	public ModelAndView setUpdate(BoardDTO boardDTO, ModelAndView mv) throws Exception {
+		QnaDTO qnaDTO = qnaService.getSelect(boardDTO);
+		mv.setViewName("board/qna/qnaUpdate");
+		mv.addObject("dto", qnaDTO);
+		
+		return mv;
+	}
+	
+	@PostMapping("update")
+	public String setUpdate(BoardDTO boardDTO) throws Exception {
+		int result = qnaService.setUpdate(boardDTO);
+		
+		return "redirect:./list";
+	}
+	
+	
+	
 }

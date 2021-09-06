@@ -6,8 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:import url="../temp/boot_head.jsp"></c:import>
 </head>
 <body>
+<c:import url="../temp/boot_nav.jsp"></c:import>
 	<h1>${board} Board List Page</h1>
 
 	<div>
@@ -18,7 +20,7 @@
 			<c:forEach items="${list}" var="dtos">
 				<tr>
 					<td>${dtos.num}</td>
-					<td>${dtos.title}</td>
+					<td><a href="./select?num=${dtos.num}">${dtos.title}</a></td>
 					<td>${dtos.contents}</td>
 					<td>${dtos.writer}</td>
 					<td>${dtos.regdate}</td>
@@ -26,6 +28,8 @@
 				</tr>
 			</c:forEach>
 		</table>
+		
+		<a href="./insert" class="btn btn-danger">ADD</a>
 	</div>
 </body>
 </html>
