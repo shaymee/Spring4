@@ -7,17 +7,22 @@ import org.springframework.stereotype.Service;
 
 import com.shaymee.s4.board.BoardDTO;
 import com.shaymee.s4.board.BoardService;
+import com.shaymee.s4.board.pager.Pager;
 
 @Service
 public class NoticeService implements BoardService {
 	
 	@Autowired
 	private NoticeDAO noticeDAO;
-	
-	@Override
-	public List<BoardDTO> getList() throws Exception {
 		
-		return noticeDAO.getList();
+	@Override
+	public List<BoardDTO> getList(Pager pager) throws Exception {
+		Long totalCount = noticeDAO.totalCount(pager);		
+		pager.makeNum(totalCount);
+		pager.makeRow();
+		
+		
+		return noticeDAO.getList(pager);
 	}
 
 	@Override

@@ -2,10 +2,12 @@ package com.shaymee.s4.board;
 
 import java.util.List;
 
+import com.shaymee.s4.board.pager.Pager;
+
 public interface BoardService {
 
 	//List
-	public abstract List<BoardDTO> getList() throws Exception; // <복습!>추상메서드: { }를 제외한 선언부까지만 
+	public abstract List<BoardDTO> getList(Pager pager) throws Exception; // <복습!>추상메서드: { }를 제외한 선언부까지만 
 	
 	//상세
 	public abstract BoardDTO getSelect(BoardDTO boardDTO) throws Exception;

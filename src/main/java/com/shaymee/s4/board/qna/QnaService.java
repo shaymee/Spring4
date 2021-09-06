@@ -15,11 +15,10 @@ public class QnaService implements BoardService {
 	private QnaDAO qnaDAO;
 	
 	@Override
-	public List<BoardDTO> getList() throws Exception {
-		// TODO Auto-generated method stub
+	public List<BoardDTO> getList() throws Exception{
 		return qnaDAO.getList();
-	}
-
+	}; 
+	
 	@Override
 	public QnaDTO getSelect(BoardDTO boardDTO) throws Exception {
 		return qnaDAO.getSelect(boardDTO);

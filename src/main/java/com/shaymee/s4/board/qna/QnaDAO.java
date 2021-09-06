@@ -16,8 +16,8 @@ public class QnaDAO implements BoardDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.shaymee.s4.board.qna.QnaDAO.";
 	
-	@Override
-	public Long getTotalCount() throws Exception {
+
+	public Long totalCount() throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

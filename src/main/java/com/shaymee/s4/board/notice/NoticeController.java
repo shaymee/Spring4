@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shaymee.s4.board.BoardDTO;
+import com.shaymee.s4.board.pager.Pager;
 
 @Controller
 @RequestMapping("/notice/**")
@@ -25,15 +26,17 @@ public class NoticeController {
 		return "notice";
 	}
 	
+	
 //	@RequestMapping(value="list", method = RequestMethod.GET) // URL주소와 메서드형식은 필수!, RequestMapping을 줄인게 @GetMapping("요청주소"), @PostMapping("요청주소")
 	
 	@GetMapping("list")
-	public ModelAndView getList() throws Exception {
+	public ModelAndView getList(Pager pager) throws Exception {
+		
+		List<BoardDTO> ar = noticeService.getList(pager);
 		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/list");
-		
-		List<BoardDTO> ar = noticeService.getList();
+		mv.addObject("pager", pager);
 		mv.addObject("list", ar);
 		
 		return mv; // (tip!!)Controller에서 리턴 안하면 jsp 경로까지 안감
