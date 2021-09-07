@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.shaymee.s4.board.BoardDTO;
 import com.shaymee.s4.board.BoardService;
+import com.shaymee.s4.board.pager.Pager;
 
 @Service
 public class QnaService implements BoardService {
@@ -15,8 +17,12 @@ public class QnaService implements BoardService {
 	private QnaDAO qnaDAO;
 	
 	@Override
-	public List<BoardDTO> getList() throws Exception{
-		return qnaDAO.getList();
+	public List<BoardDTO> getList(Pager pager) throws Exception{
+		Long totalCount = qnaDAO.totalCount(pager);
+		pager.makeNum(totalCount);
+		pager.makeRow();
+		
+		return qnaDAO.getList(pager);
 	}; 
 	
 	@Override

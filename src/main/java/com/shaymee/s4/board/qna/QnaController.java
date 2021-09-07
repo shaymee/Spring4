@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shaymee.s4.board.BoardDTO;
+import com.shaymee.s4.board.pager.Pager;
 
 @Controller
 @RequestMapping("/qna/**")
@@ -25,11 +26,13 @@ public class QnaController {
 	}
 
 	@GetMapping("list") // 1. url 주소에 /qna/list가 오면 백엔드의 해당메서드로 오고
-	public ModelAndView getList() throws Exception {
+	public ModelAndView getList(Pager pager) throws Exception {
+		List<BoardDTO> ar = qnaService.getList(pager);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("board/list");  // 2. 작업을 마치고 jsp 경로로 보내버리기~!
-		List<BoardDTO> ar = qnaService.getList();
+		mv.addObject("pager", pager);
 		mv.addObject("list", ar);
+		
 		return mv;
 	}
 	
