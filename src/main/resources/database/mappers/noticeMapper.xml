@@ -36,6 +36,10 @@
   		SELECT * FROM NOTICE WHERE NUM = #{num}
   	</select>
   
+    <update id="setHitsUpdate" parameterType="BoardDTO">  <!-- 조회수 증가하는 메서드. => Service메서드에도 작업해줘야함 -->
+  		update notice set hits=hits+1 where num=#{num}
+  	</update>
+  
   	<insert id="setInsert" parameterType="BoardDTO">
   		INSERT INTO NOTICE VALUES (NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, sysdate, 0)
   	</insert>

@@ -27,6 +27,7 @@ public class QnaService implements BoardService {
 	
 	@Override
 	public QnaDTO getSelect(BoardDTO boardDTO) throws Exception {
+		qnaDAO.setHitsUpdate(boardDTO);
 		return qnaDAO.getSelect(boardDTO);
 	}
 
