@@ -5,20 +5,46 @@
   
   <mapper namespace="com.shaymee.s4.board.notice.NoticeDAO">
   
-  	<select id="getList" resultType="NoticeDTO">
+  	<select id="totalCount" resultType="java.lang.Long" parameterType="Pager">
+  		SELECT COUNT(NUM) FROM NOTICE
+  		
+  		<if test="kind == 'title'">WHERE title LIKE '%' || #{search} || '%'</if>
+  		<if test="kind == 'contents'">WHERE contents LIKE '%' || #{search} || '%'</if>
+  		<if test="kind == 'writer'">WHERE writer LIKE '%' || #{search} || '%'</if>
+  	</select>
+  
+  	<select id="getList" resultType="NoticeDTO" parameterType="Pager">
   		SELECT * 
 		FROM (
-		    SELECT rownum R, NT.* FROM 
+		    SELECT ROWNUM R, NT.* FROM 
 		        (SELECT *  
-		        FROM NOTICE 
-		        ORDER BY NUM DESC) NT)
-		        
-		        <!-- WHERE R BETWEEN #{startRow} AND #{lastRow} -->
+		        FROM NOTICE
+		        WHERE 
+		        	<choose>
+		        		<when test="kind=='title'">
+		        			title
+		        		</when>
+		        		<when test="kind=='contents'">
+		        			contents
+		        		</when>
+		        		<otherwise>
+		        			writer
+		        		</otherwise>		        	
+		        	</choose>
+		         	LIKE '%' || #{search} || '%'
+		         
+		        ORDER BY NUM DESC) NT)		        
+		        WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   
   	<select id="getSelect" parameterType="BoardDTO" resultType="NoticeDTO"> <!-- parameterType은 부모타입, resultType은 각각 받을 타입 -->
   		SELECT * FROM NOTICE WHERE NUM = #{num}
   	</select>
+  
+  	<update id="setHitsUpdate" parameterType="BoardDTO">
+  		UPDATE NOTICE SET HITS=HITS+1
+  		WHERE NUM=#{num}
+  	</update>
   
   	<insert id="setInsert" parameterType="BoardDTO">
   		INSERT INTO NOTICE VALUES (NOTICE_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, sysdate, 0)
@@ -32,11 +58,7 @@
   		UPDATE NOTICE SET TITLE=#{title}, CONTENTS=#{contents}
   		WHERE NUM=#{num} 
   	</update>
-  	
-  	<select id="totalCount" resultType="java.lang.String">
-  		SELECT COUNT(NUM) FROM NOTICE;
-  	</select>
-  
+
   </mapper>
   
  

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.shaymee.s4.board.BoardDTO;
+import com.shaymee.s4.board.pager.Pager;
 
 @Controller
 @RequestMapping("/qna/**")
@@ -25,11 +26,14 @@ public class QnaController {
 	}
 
 	@GetMapping("list") // 1. url 주소에 /qna/list가 오면 백엔드의 해당메서드로 오고
-	public ModelAndView getList() throws Exception {
+	public ModelAndView getList(Pager pager) throws Exception {
+		List<BoardDTO> ar = qnaService.getList(pager);
+		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("board/list");  // 2. 작업을 마치고 jsp 경로로 보내버리기~!
-		List<BoardDTO> ar = qnaService.getList();
+		mv.setViewName("board/list");  // 2. 작업을 마치고 jsp 경로로 보내버리기
+		mv.addObject("pager", pager);
 		mv.addObject("list", ar);
+		
 		return mv;
 	}
 	
@@ -46,7 +50,7 @@ public class QnaController {
 	@GetMapping("insert")
 	public ModelAndView setInsert() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("board/qna/qnaInsert");
+		mv.setViewName("board/insert");
 		
 		return mv;
 	}
@@ -68,7 +72,7 @@ public class QnaController {
 	@GetMapping("update")
 	public ModelAndView setUpdate(BoardDTO boardDTO, ModelAndView mv) throws Exception {
 		QnaDTO qnaDTO = qnaService.getSelect(boardDTO);
-		mv.setViewName("board/qna/qnaUpdate");
+		mv.setViewName("board/update");
 		mv.addObject("dto", qnaDTO);
 		
 		return mv;
@@ -80,6 +84,26 @@ public class QnaController {
 		
 		return "redirect:./list";
 	}
+	
+	@GetMapping("reply")
+	public ModelAndView setReply() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("board/reply");
+		
+		return mv;
+	}
+	
+	@PostMapping("reply")
+	public ModelAndView setReply(QnaDTO qnaDTO) throws Exception {
+		int result = qnaService.setReply(qnaDTO);
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("redirect:./list");
+		
+		return mv;
+	}
+	
+	
+	
 	
 	
 	

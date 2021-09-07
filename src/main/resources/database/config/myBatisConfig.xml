@@ -10,6 +10,7 @@
   		<typeAlias type="com.shaymee.s4.board.qna.QnaDTO" alias="QnaDTO"/>
   		
   		<typeAlias type="java.lang.Long" alias="Long"/>
+  		<typeAlias type="com.shaymee.s4.board.pager.Pager" alias="Pager"/>
   	
   	</typeAliases>
   </configuration>

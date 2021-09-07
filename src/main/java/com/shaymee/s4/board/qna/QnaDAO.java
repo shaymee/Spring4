@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.shaymee.s4.board.BoardDAO;
 import com.shaymee.s4.board.BoardDTO;
+import com.shaymee.s4.board.pager.Pager;
 
 @Repository
 public class QnaDAO implements BoardDAO {
@@ -17,22 +18,21 @@ public class QnaDAO implements BoardDAO {
 	private final String NAMESPACE="com.shaymee.s4.board.qna.QnaDAO.";
 	
 	@Override
-	public Long getTotalCount() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public Long totalCount(Pager pager) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"totalCount", pager);
 	}
 
 	@Override
-	public List<BoardDTO> getList() throws Exception {
+	public List<BoardDTO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList(NAMESPACE+"getList");
+		return sqlSession.selectList(NAMESPACE+"getList", pager);
 	}
 
 	@Override
 	public QnaDTO getSelect(BoardDTO boardDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getSelect", boardDTO);
 	}
-
+	
 	@Override
 	public int setInsert(BoardDTO boardDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"setInsert", boardDTO);
@@ -48,10 +48,17 @@ public class QnaDAO implements BoardDAO {
 		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
 	}
 	
+	public int setReplyUpdate(QnaDTO qnaDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnaDTO);
+	}
+	
 	//답글 달기. Notice에는 없고 QNA에만 있는 기능
 	public int setReply(QnaDTO qnaDTO) throws Exception { // 얘는 QNA에서만 쓰는거니까 일단 QnaDTO를 매개변수로 선언
-		
-		return 0;
+		return sqlSession.insert(NAMESPACE+"setReply", qnaDTO);
+	}
+	
+	public int setHitsUpdate(BoardDTO boardDTO) {
+		return sqlSession.update(NAMESPACE+"setHitsUpdate", boardDTO);
 	}
 
 }

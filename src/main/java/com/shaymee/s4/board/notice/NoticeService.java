@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.shaymee.s4.board.BoardDTO;
 import com.shaymee.s4.board.BoardService;
+import com.shaymee.s4.board.pager.Pager;
 
 @Service
 public class NoticeService implements BoardService {
@@ -15,13 +16,17 @@ public class NoticeService implements BoardService {
 	private NoticeDAO noticeDAO;
 	
 	@Override
-	public List<BoardDTO> getList() throws Exception {
+	public List<BoardDTO> getList(Pager pager) throws Exception {
+		Long totalCount = noticeDAO.totalCount(pager);
+		pager.makeNum(totalCount);
+		pager.makeRow();		
 		
-		return noticeDAO.getList();
+		return noticeDAO.getList(pager);
 	}
 
 	@Override
 	public NoticeDTO getSelect(BoardDTO boardDTO) throws Exception {
+		noticeDAO.setHitsUpdate(boardDTO);
 		return noticeDAO.getSelect(boardDTO);
 	}
 
@@ -37,7 +42,7 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception {
-		return noticeDAO.setInsert(boardDTO);
+		return noticeDAO.setUpdate(boardDTO);
 	}
 
 }

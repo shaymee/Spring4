@@ -29,6 +29,13 @@
 
 	<a href="./delete?num=${dto.num}" class="btn btn-dark">Delete</a>
 	<a href="./update?num=${dto.num}" class="btn btn-danger">Update</a>
+	<c:if test="${board ne 'notice'}">
+		<a href="./reply?num=${dto.num}" class="btn btn-primary">Reply</a>
+	</c:if>
+	<p>
+		<a href="./list?pn=${param.pn}" class="btn btn-info">목록으로 가기</a>
+	</p>
+	
 </div>
 
 </body>

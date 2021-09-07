@@ -5,23 +5,47 @@
   
   <mapper namespace="com.shaymee.s4.board.qna.QnaDAO">
   
-  	<select id="getList" resultType="QnaDTO">
+  	<select id="totalCount" resultType="java.lang.Long" parameterType="Pager">
+  		SELECT COUNT(NUM) FROM QNA
+  		<if test="kind == 'title'">WHERE title LIKE '%' || #{search} || '%'</if>
+  		<if test="kind == 'contents'">WHERE contents LIKE '%' || #{search} || '%'</if>
+  		<if test="kind == 'writer'">WHERE writer LIKE '%' || #{search} || '%'</if>
+  	</select>
+  
+  	<select id="getList" resultType="QnaDTO" parameterType="Pager">
   		SELECT * 
 		FROM (
-		    SELECT rownum R, QA.* FROM 
+		    SELECT ROWNUM R, QA.* FROM 
 		        (SELECT *  
 		        FROM QNA 
-		        ORDER BY NUM DESC) QA)
-		        
-		        <!-- WHERE R BETWEEN #{startRow} AND #{lastRow} -->
+		        WHERE
+		        	<choose>
+		        		<when test="kind == 'title'">
+		        			title
+		        		</when>
+		        		<when test="kind == 'contents'">
+		        			contents
+		        		</when>
+		        		<otherwise>
+		        			writer
+		        		</otherwise>		        	
+		        	</choose>
+		         	LIKE '%' || #{search} || '%'
+		        ORDER BY ref desc, step asc) QA)
+		        WHERE R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   
   	<select id="getSelect" parameterType="BoardDTO" resultType="QnaDTO"> <!-- parameterType은 부모타입, resultType은 각각 받을 타입 -->
   		SELECT * FROM QNA WHERE NUM = #{num}
   	</select>
   
+  	<update id="setHitsUpdate" parameterType="BoardDTO">
+  		UPDATE QNA SET HITS=HITS+1
+  		WHERE NUM=#{num}
+  	</update>
+  
   	<insert id="setInsert" parameterType="BoardDTO">
-  		INSERT INTO QNA VALUES (QNA_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, sysdate, 0, 0, 0, 0)
+  		INSERT INTO QNA VALUES (QNA_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, sysdate, 0, QNA_SEQ.CURRVAL, 0, 0)
   	</insert>
   	
   	<delete id="setDelete" parameterType="BoardDTO">
@@ -32,10 +56,16 @@
   		UPDATE QNA SET TITLE=#{title}, CONTENTS=#{contents}
   		WHERE NUM=#{num} 
   	</update>
-  	
-  	<select id="totalCount" resultType="java.lang.String">
-  		SELECT COUNT(NUM) FROM QNA;
-  	</select>
+  
+  	<update id="setReplyUpdate" parameterType="QnaDTO">
+  		UPDATE QNA SET STEP=STEP+1
+  		WHERE REF = #{ref} and STEP > #{step}
+  	</update>
+  
+  	<insert id="setReply" parameterType="QnaDTO">
+  		INSERT INTO QNA (NUM, TITLE, CONTENTS, WRITER, REGDATE, HITS, REF, STEP, DEPTH)
+  		VALUES (QNA_SEQ.NEXTVAL, #{title}, #{contents}, #{writer}, sysdate, 0, #{ref}, #{step}, #{depth})
+  	</insert>
   
   </mapper>
   
