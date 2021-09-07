@@ -40,7 +40,13 @@
 			<c:forEach items="${list}" var="dtos">
 				<tr>
 					<td>${dtos.num}</td>
-					<td><a href="./select?num=${dtos.num}">${dtos.title}</a></td>
+					<td><a href="./select?num=${dtos.num}">
+					<c:catch>
+					<c:forEach begin="1" end="${dtos.depth}">
+						ㄴ
+					</c:forEach>
+					</c:catch>
+					${dtos.title}</a></td>
 					<td>${dtos.contents}</td>
 					<td>${dtos.writer}</td>
 					<td>${dtos.regdate}</td>

@@ -48,10 +48,16 @@ public class QnaDAO implements BoardDAO {
 		return sqlSession.update(NAMESPACE+"setUpdate", boardDTO);
 	}
 	
+	public int setReplyUpdate(QnaDTO qnaDTO) throws Exception {
+		return sqlSession.update(NAMESPACE+"setReplyUpdate", qnaDTO);
+	}
+	
+	
 	//답글 달기. Notice에는 없고 QNA에만 있는 기능
 	public int setReply(QnaDTO qnaDTO) throws Exception { // 얘는 QNA에서만 쓰는거니까 일단 QnaDTO를 매개변수로 선언
 		
-		return 0;
+		return sqlSession.insert(NAMESPACE+"setReply", qnaDTO);
 	}
 
+	
 }
