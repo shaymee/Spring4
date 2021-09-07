@@ -43,7 +43,7 @@
 					<td><a href="./select?num=${dtos.num}">
 					<c:catch>
 					<c:forEach begin="1" end="${dtos.depth}">
-						ㄴ
+						-->
 					</c:forEach>
 					</c:catch>
 					${dtos.title}</a></td>
