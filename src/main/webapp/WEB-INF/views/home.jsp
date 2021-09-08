@@ -7,6 +7,7 @@
 	<script type="text/javascript">
 		alert('Hello World!')
 	</script>
+	<link href="./resources/css/home.css" rel="stylesheet">
 <c:import url="./temp/boot_head.jsp"></c:import>
 </head>
 <body>
@@ -15,10 +16,11 @@
 	Main Page
 </h1>
 
+<img alt="" src="./resources/images/pachirisu2.jpg">
 
 
 	<script type="text/javascript">
-		console.
+		console.log('body Script')
 	</script>
 </body>
 </html>
