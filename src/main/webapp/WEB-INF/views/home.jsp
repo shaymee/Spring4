@@ -4,6 +4,9 @@
 <html>
 <head>
 	<title>Home</title>
+	<script type="text/javascript">
+		alert('Hello World!')
+	</script>
 <c:import url="./temp/boot_head.jsp"></c:import>
 </head>
 <body>
@@ -14,6 +17,8 @@
 
 
 
-
+	<script type="text/javascript">
+		console.
+	</script>
 </body>
 </html>
