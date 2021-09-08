@@ -27,10 +27,10 @@
 		  <input type="text" class="form-control" name="writer" id="writer" placeholder="Enter WRITER">
 		</div>
 		
-		<button type="submit" class="btn btn-dark">입력완료</button>
+		<button id="d1" type="button" class="btn btn-dark">입력완료</button>
 
 	</form>
 </div>
-
+<script type="text/javascript" src="../resources/js/boardcheck.js"></script>
 </body>
 </html>
