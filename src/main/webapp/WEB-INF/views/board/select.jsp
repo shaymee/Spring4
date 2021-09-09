@@ -35,8 +35,16 @@
 	<p>
 		<a href="./list?pn=${param.pn}" class="btn btn-info">목록으로 가기</a>
 	</p>
-	
 </div>
 
+	<div>
+		<input type="checkbox" class="c1" value="1" checked="true">
+		<input type="checkbox" class="c1" value="2" >
+		<input type="checkbox" class="c1" value="3" checked="true">
+		<input type="checkbox" class="c1" value="4">
+	</div>
+	<button id="btn">CHECK</button>
+
+<script type="text/javascript" src="../resources/js/select.js"></script>
 </body>
 </html>

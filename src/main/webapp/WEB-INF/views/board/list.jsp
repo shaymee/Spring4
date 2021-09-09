@@ -42,18 +42,18 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${list}" var="dtos">
+				<c:forEach items="${list}" var="dtos" varStatus="i">
 					<tr>
 						<td>${dtos.num}</td>
-						<td><a href="./select?num=${dtos.num}&pn=${pager.pn}">
+						<td><span class="c1" data-writer-num="${i.index}">
 						<c:catch>
 							<c:forEach begin="1" end="${dtos.depth}">
 								->
 							</c:forEach>
 						</c:catch>						
-						${dtos.title}</a></td>
+						${dtos.title}</span></td>
 						<td>${dtos.contents}</td>
-						<td>${dtos.writer}</td>
+						<td><span id="w${i.index}">${dtos.writer}</span></td> 
 						<td>${dtos.regdate}</td>
 						<td>${dtos.hits}</td>
 					</tr>
@@ -97,6 +97,8 @@
 		<!-- /Paging Setting -->
 		
 		<a href="./insert" class="btn btn-danger">ADD</a>
+		<button id="btn">CLICK</button>
 	</div>
+<script type="text/javascript" src="../resources/js/list.js"></script>
 </body>
 </html>
