@@ -8,9 +8,10 @@
   		<typeAlias type="com.shaymee.s4.board.BoardDTO" alias="BoardDTO"/>
   		<typeAlias type="com.shaymee.s4.board.notice.NoticeDTO" alias="NoticeDTO"/>
   		<typeAlias type="com.shaymee.s4.board.qna.QnaDTO" alias="QnaDTO"/>
+  		<typeAlias type="com.shaymee.s4.member.MemberDTO" alias="MemberDTO"/>
   		
   		<typeAlias type="java.lang.Long" alias="Long"/>
   		<typeAlias type="com.shaymee.s4.board.pager.Pager" alias="Pager"/>
-  	
+  		  	
   	</typeAliases>
   </configuration>

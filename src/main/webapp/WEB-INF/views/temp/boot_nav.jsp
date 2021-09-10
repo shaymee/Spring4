@@ -19,8 +19,16 @@
           <a class="nav-link" href="${pageContext.request.contextPath}/qna/list">QnA List</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><구분점></a>
         </li>
+        
+        <li class="nav-item">
+          <a class="nav-link" href="${pageContext.request.contextPath}/member/check">Join</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="${pageContext.request.contextPath}/member/login">Login</a>
+        </li>
+        
       </ul>
     </div>
   </div>
