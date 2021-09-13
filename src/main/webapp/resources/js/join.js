@@ -10,10 +10,28 @@
  const idResult = document.getElementById('idResult');
  const pwResult = document.getElementById('pwResult');
  const idCheck = document.getElementById('idCheck');
+ const pw2 = document.getElementById('pw2');
+ 
  
  idCheck.addEventListener('click', function(){
 	open("./idCheck?id="+id.value, "", "width=400, height=200, top=200, left=300"); 
 	// window는 최상위객체이므로 생략가능
+});
+
+ pws[1].addEventListener('blur', function(){
+	// 비어있는 것들 검사
+	let ce = checkEmpty(pws); // let라고 하면 선언된 지역 내에서만 쓰는 지역변수
+	// pw 두개의 값이 같은지 검사
+	let ce2 = checkEqual(pws[0].value, pws[1].value);
+	// pw 글자수 검사
+	let cl = checkLength();
+	
+	if(ce&&ce2&&cl){
+		pwResult.innerHTML='pw 입력성공';
+	} else {
+		alert('pw 재입력');
+		pws[0].focus();
+	}
 });
 
  btnid.addEventListener("click", function(){
@@ -62,3 +80,4 @@ function checkEmpty(puts){
 	
 	return result;
 }
+

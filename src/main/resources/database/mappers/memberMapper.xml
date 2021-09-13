@@ -5,8 +5,22 @@
   
   <mapper namespace="com.shaymee.s4.member.MemberDAO">
   
+	<update id="setUpdate" parameterType="MemberDTO">
+		UPDATE MEMBER SET PW=#{pw}, phone=#{phone}, email=#{email}
+		where id=#{id}
+	</update>  
+  
+	<delete id="setDelete" parameterType="MemberDTO">
+		DELETE MEMBER WHERE ID=#{id} and PW=#{pw}
+	</delete>  
+  
+  	<insert id="setJoin" parameterType="MemberDTO">
+  		INSERT INTO MEMBER (ID, PW, NAME, PHONE, EMAIL)
+  		VALUES (#{id}, #{pw}, #{name}, #{phone}, #{email})
+  	</insert>
+  	
   	<select id="getLogin" parameterType="MemberDTO" resultType="MemberDTO">
-  		SELECT ID FROM MEMBER WHERE ID = #{id} and PW = #{pw}
+  		SELECT * FROM MEMBER WHERE ID = #{id} and PW = #{pw}
   	</select>
   
   	<select id="getIdCheck" parameterType="MemberDTO" resultType="MemberDTO">

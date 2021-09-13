@@ -5,30 +5,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Join page</title>
+<title>Update page</title>
 <c:import url="../temp/boot_head.jsp"></c:import>
 </head>
 <body>
 <c:import url="../temp/boot_nav.jsp"></c:import>
-	<h1>Join page</h1>
+	<h1>Update page</h1>
 	<br>	
 
 	<div class="container">
-		<form id="frm" action="join" method="post"> <!-- 앞에 아무것도 안쓰면 상대경로이자 현재경로 "./join"과 같음 -->
-  			<div class="mb-3">
-    			<label for="id" class="form-label">ID</label>
-    			<input type="text" name="id" class="form-control put" id="id">
-				<button type="button" id="idCheck">ID중복확인</button>
-				<div id="idResult"></div>
-			</div>
+		<form id="frm" action="update" method="post"> <!-- 앞에 아무것도 안쓰면 상대경로이자 현재경로 "./join"과 같음 -->
 			
 			<div class="mb-3">
-    			<label for="name" class="form-label">이름</label>
-    			<input type="text" name="name" class="form-control put" id="name">
-    		</div>
-  			<div class="mb-3">
     			<label for="pw" class="form-label">Password</label>
-    			<input type="password" name="pw" class="form-control put pws" id="pw1">
+    			<input type="password" name="pw" class="form-control put pws" id="pw1" value="${member.pw}">
   			</div>
   			<div class="mb-3">
     			<label for="pw2" class="form-label">Password 확인</label>
@@ -37,14 +27,14 @@
   			</div>
   			<div class="mb-3">
     			<label for="phone" class="form-label">휴대폰번호</label>
-    			<input type="tel" name="phone" class="form-control put" id="phone">
+    			<input type="tel" name="phone" class="form-control put" id="phone" value="${member.phone}">
 			</div>
 			<div class="mb-3">
     			<label for="email" class="form-label">E-Mail</label>
-    			<input type="email" name="email" class="form-control put" id="email">
+    			<input type="email" name="email" class="form-control put" id="email" value="${member.email}">
 			</div>
 			<br>
-		<button id="btnid" type="button" class="btn btn-primary">Join</button>
+		<button id="btnid" type="submit" class="btn btn-primary">Update</button>
 		</form>
 	
 	</div>

@@ -12,6 +12,18 @@ public class MemberDAO {
 	private final String NAMESPACE = "com.shaymee.s4.member.MemberDAO.";
 	//DAO의 NAMESPACE 이름은 mapper의 namespace와 동일하게
 	
+	public int setUpdate(MemberDTO memberDTO) throws Exception{
+		return sqlSession.update(NAMESPACE+"setUpdate", memberDTO);
+	}
+	
+	public int setDelete(MemberDTO memberDTO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"setDelete", memberDTO);
+	}
+	
+	public int setJoin(MemberDTO memberDTO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"setJoin", memberDTO);
+	}
+	
 	public MemberDTO getLogin(MemberDTO memberDTO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"getLogin", memberDTO);
 	}

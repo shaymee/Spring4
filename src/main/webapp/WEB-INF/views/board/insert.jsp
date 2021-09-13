@@ -24,7 +24,7 @@
 		</div>
 		<div class="mb-3">
 		  <label for="writer" class="form-label">작성자</label>
-		  <input type="text" class="form-control" name="writer" id="writer" placeholder="Enter WRITER">
+		  <input type="text" class="form-control" name="writer" id="writer" readonly="readonly" value="${member.id}" placeholder="Enter WRITER">
 		</div>
 		
 		<button type="submit" class="btn btn-dark">입력완료</button>

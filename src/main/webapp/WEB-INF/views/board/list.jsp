@@ -96,7 +96,10 @@
 		</nav>
 		<!-- /Paging Setting -->
 		
-		<a href="./insert" class="btn btn-danger">ADD</a>
+		
+		<c:if test="${not empty member}">
+			<a href="./insert" class="btn btn-danger">ADD</a>
+		</c:if>
 	</div>
 </body>
 </html>
